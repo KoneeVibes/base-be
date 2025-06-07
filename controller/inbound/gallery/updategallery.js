@@ -38,15 +38,12 @@ const updateGallery = async (req, res) => {
         }
 
         const oldFilename = foundGallery.url?.split('/').pop();
-        console.log(oldFilename);
         let updatedGallery = null;
 
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             const title = titles[i] || "";
             const description = descriptions[i] || "";
-
-            console.log(file.originalname);
 
             const galleryDoc = {
                 url: file.path,
