@@ -3,9 +3,11 @@ const Gallery = require("../../../model/gallery");
 const Project = require("../../../model/project");
 
 const uploadGallery = async (req, res) => {
-    const { path } = req.file || {};
+    const files = req.files || [];
     const { projectId } = req.params || {};
-    const { title, description } = req.body || {};
+    const { titles, descriptions } = req.body || {};
+    const imagesData = [];
+
     // check for project id
     if (!projectId) {
         return res.status(400).json({
@@ -13,13 +15,27 @@ const uploadGallery = async (req, res) => {
             message: "Project Id not found, Cannot Proceed"
         });
     };
-    // check for complete payload
-    if (!title || !description) {
+
+    // check is any files were uploaded
+    if (!Array.isArray(files) || files.length === 0) {
         return res.status(400).json({
             status: "fail",
-            message: "Incomplete Gallery Details, Cannot Proceed"
+            message: "No images uploaded.",
         });
-    };
+    }
+
+    // populate the imagesData array in proper format
+    files.forEach((file, index) => {
+        const title = Array.isArray(titles) ? titles[index] : titles;
+        const description = Array.isArray(descriptions) ? descriptions[index] : descriptions;
+        imagesData.push({
+            id: uuidv4(),
+            url: file.path,
+            title,
+            description
+        });
+    });
+
     try {
         const project = await Project.findOne({ id: projectId, status: "active" });
         if (!project) {
@@ -29,14 +45,10 @@ const uploadGallery = async (req, res) => {
             });
         };
 
-        const gallery = new Gallery({
-            id: uuidv4(),
-            project: projectId,
-            title,
-            description,
-            url: path
-        });
-        const savedGallery = await gallery.save();
+        const savedGallery = await Gallery.insertMany(imagesData.map(img => ({
+            ...img,
+            project: projectId
+        })));
         if (savedGallery) {
             return res.status(201).json({
                 status: "success",

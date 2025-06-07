@@ -33,13 +33,11 @@ const createUploader = ({ getFolderName, fields, fieldName, isMultiple = false, 
         },
     });
 
-    // return isMultiple ? upload.array(fieldName, maxCount) : upload.single(fieldName);
-    return isMultiple ? upload.fields(fields) : upload.single(fieldName);
+    return isMultiple ? upload.array(fieldName) : upload.single(fieldName);
 };
 
 module.exports = (options) => (req, res, next) => {
     const upload = createUploader(options);
-
     upload(req, res, (err) => {
         if (err) {
             // the error comes, but somehow this

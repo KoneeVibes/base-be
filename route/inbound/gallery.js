@@ -4,6 +4,7 @@ const router = express.Router();
 const options = {
     getFolderName: (req, file) => "gallery",
     fieldName: "img",
+    isMultiple: true,
     fileFilter: (req, file, cb) => {
         const allowedTypes = ["image/jpeg", "image/png"];
         if (allowedTypes.includes(file.mimetype)) {
@@ -13,6 +14,7 @@ const options = {
         }
     }
 };
+
 
 router.get("/", require("../../controller/outbound/gallery/retrieveallgallery"));
 router.post("/:projectId/upload", fileUpload(options), require("../../controller/inbound/gallery/uploadgallery"));
