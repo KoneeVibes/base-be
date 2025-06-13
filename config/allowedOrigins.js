@@ -6,6 +6,7 @@ const allowedOrigins = [
     "https://base-fe.onrender.com",
     "https://base-be.onrender.com",
     "https://designsbylami.onrender.com",
+    "https://www.designsbylam.com"
 ];
 
 module.exports = allowedOrigins;
