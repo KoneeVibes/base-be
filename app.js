@@ -27,9 +27,11 @@ app.use("/admin/project", require("./route/inbound/project"));
 app.use("/user/auth", require("./route/inbound/authentication"));
 app.use("/user/usermanagement", require("./middleware/authorization"), require("./route/inbound/user"));
 app.use("/user/gallery", require("./middleware/authorization"), require("./route/inbound/gallery"));
+app.use("/user/blog", require("./middleware/authorization"), require("./route/inbound/blog"));
 app.use("/user/:userId/project", require("./middleware/authorization"), require("./route/inbound/project"));
 
 // outbound routes would go under here:
 app.use("/public/gallery", require("./middleware/authentication"), require("./route/outbound/gallery"));
+app.use("/public/blog", require("./middleware/authentication"), require("./route/outbound/blog"));
 
 module.exports = app;
