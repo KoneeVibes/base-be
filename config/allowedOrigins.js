@@ -9,6 +9,7 @@ const allowedOrigins = [
     "https://base-be.onrender.com",
     "https://designsbylami.onrender.com",
     "https://www.designsbylam.com",
+    "https://valleyridge.netlify.app",
     "https://www.valleyridgeenergyservices.com",
 ];
 
