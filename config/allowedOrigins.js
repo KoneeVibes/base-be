@@ -4,6 +4,7 @@ const allowedOrigins = [
     "http://localhost:3000",
     "http://localhost:8085",
     "http://localhost:3031",
+    "https://app.sparklabs.ng",
     "https://base-fe.onrender.com",
     "https://base-be.onrender.com",
     "https://designsbylami.onrender.com",
