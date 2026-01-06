@@ -11,6 +11,7 @@ const allowedOrigins = [
 	"https://www.designsbylam.com",
 	"https://valleyridge.netlify.app",
 	"https://www.valleyridgeenergy.com",
+	"https://www.blqconsulting.com",
 ];
 
 module.exports = allowedOrigins;
